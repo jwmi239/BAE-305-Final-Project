@@ -19,8 +19,58 @@ This repository contains all of the files associated with the BAE 305 final proj
 ### Steering
 
 #### Materials
+  •	¼” – 20 tpi Hardware
+
+  •	3D printed Steering Components
+
+    -	Steering Knuckles
+    
+    -	Drag Links
+    
+    -	Front Carriage
+    
+  •	SG90 Servo and Included Lever (Pitman arm)
+
+  •	1/8” Cotter Pins
 
 #### Assembly Procedures
+The steering system is simple to assemble, creating an intuitive assembly and maintenance process. 
+
+Step 1: Bolt the front carriage under the base of the car using three ¼” bolts
+
+![image](https://github.com/user-attachments/assets/08a6f2a9-ff0a-4d6a-b5ac-0010a96d6840)
+
+Figure X: Steering System Assembly Step 1
+
+Step 2: Install steering knuckle on each side of the front carriage using two ¼” bolts
+
+![image](https://github.com/user-attachments/assets/339a3a2a-9231-463b-99c6-5513c82f32aa)
+
+Figure X: Steering System Assembly Step 2
+
+Step 3: Bolt Servo mount to base of car using two ¼” bolts and install the servo
+
+![image](https://github.com/user-attachments/assets/3eb1e185-1fda-4cd7-b99e-526b81092372)
+
+Figure X: Steering System Assembly Step 3
+
+Step 4: Connect the servo to each steering knuckle with respected drag links, cotter pin each connection
+
+![image](https://github.com/user-attachments/assets/58e12c10-ae57-48ac-aff8-da3e45756ed1)
+
+Figure X: Steering System Assembly Step 4
+
+Step 5: Bolt wheels to the outside face of each steering knuckle using a ¼” bolt
+
+![image](https://github.com/user-attachments/assets/a2e4a77f-6bc3-4ebd-810c-9c81bceaf158)
+
+Figure X: Steering System Assembly Step 5
+
+Step 6: The servo is then wired using 5V for power, one power signal from a PWM pin, and a ground. The Arduino is coded to send an output for left and right turns at 45° based on the input from the controller. 
+
+![image](https://github.com/user-attachments/assets/9d0cadc0-ba3e-405b-9068-16020f9461e4)
+
+Figure X: Steering Servo Wiring Schematic
 
 ### Body
 
@@ -70,7 +120,17 @@ Figure X: Circuit Diagram for the LED circuit. This is repeated for the second L
 ### Distance Sensing
 
 ### Steering
+To create a more realistically functioning car, we decided to model the steering after a two-wheel bell crank. The bell crank method uses a two-link system connected to each wheel that allows both wheels to turn from a single servo, similar to actual automobiles. This is done through a series of steering components, which includes a pitman arm, steering knuckles, and drag links. The goal with this system was to create what is known as Ackermann geometry. A steering system is considered to be Ackermann steering if the inside wheel is at a sharper angle than the outside wheel while turning. This is the case with the bell crank system, as seen below.
 
+![image](https://github.com/user-attachments/assets/ec759c19-a169-40f3-bb2a-fdf99235ec02)
+
+Figure X: Ackermann Steering Angle Phenomenon
+
+With the pitman arm at a center-point, equal length drag links, and mirrored geometry for the steering knuckles, this creates a sharper angle for the side that the servo is turning away from. If not for this phenomenon, the inside wheel would be fighting the ground during turns due to travelling on a smaller turning radii than the outside wheel, as shown below. Ackermann steering allows for less wear on tires, steering components, and axle gearing if applicable. 
+
+![image](https://github.com/user-attachments/assets/5186bd61-a32d-4c9a-b299-12ec5034290e)
+
+Figure X: Inside wheel vs. Outside wheel Turning Radius 
 ### Sound
 
 The car contains a sound component that functions as a final output for multiple logic systems. The sound for the car functions through a DFPlayer Mini. The DFPlayer is an MP3 module for the Arduino. The DFPlayer Mini was chosen as the sound playing device because of its easy integration with the Arduino system. Arduino IDE has a downloadable library for the DFplayer that allows audio to be integrated into the code with a few simple commands. For this application, the DFPlayer Mini connects to a 1W speaker that projects the sound. Housing a micro-SD card, the player runs MP3 audio files when directed by the Arduino microcontroller.  A voltage regulator and 9V battery were used to ensure the system received adequate power. The 9V supplied the voltage, and the regulator ensured adequate current flowed through the DFPlayer and to the speaker.  
@@ -81,6 +141,8 @@ Lights were an added design feature of the car. These lights were to signal as t
 
 ## Testing Procedures
 
+
+The steering system also proposed a few challenges. The code was simple, just a few lines taken from online sources and tailored to the needs of this project. The CAD modeling resulted in relatively smooth implementation of the moving parts. However, the first iteration of the steering knuckles did not have clearance for the “lug nuts” and required more drop to allow for them. Connection methods for the drag links were also a point of testing. The holes were too small to reasonably use bolts and screws would’ve inhibited the rotation during turning. 
 ## Results
 
 ## Discussion
@@ -90,3 +152,5 @@ Throughout the project, there were multiple challenges and complications that ne
 Bluetooth control of the car proved to be both one of the most prominent features and drawbacks of the car. Proving difficult to set up and maintain manually, Bluetooth through a Raspberry Pi was an effective means of remote communication when connected. The system communicated with little delay and the signal transmitted without error. Bluetooth as incorporated in this system, however, had many drawbacks that would limit how well the project could be extrapolated to other projects. First, the connection needed to be manually established. The connection would often get lost, and the connection process repeated. Additionally, using the Pi as a relay from the controller and communicator to the Arduino proved to be an added layer of complexity. Navigating the Pi system was not user friendly and minimally added to the effectiveness of the project. While it did increase the range of connection when compared to the controller and Arduino alone, it was still limited by the inherent limitations of Bluetooth (about 30ft). Higher quality controllers or radio controllers are available for purchase that have greater range, and can cut out the Pi as an intermediate, effectively communicating directly with the Arduino. 
 
 Another limitation with the WildCar design is in regard to power. The Ardunos are only capable of 5V power output with a power pack. Many parts of the design required greater power to run sufficiently when integrated. The final design required two 5V power packs and two 9V batteries. The design was limited by these sources because the batteries would quickly drain and require replacement. The power sources, whilst rechargeable, faced similar issues. The system did supply power effectively, and each component functioned properly with the power supplied. Multiple sources also allowed for each component to receive the specific power needed independently. Performance would decrease as the power drained. A higher quality single power supply would allow for a more integrated design, would last longer, and clean up the wiring. As seen in the use of a voltage regulator to meet the specific needs of the speaker, power output could be modified as needed to meet individual needs of components. A better power supply would also allow the car to run longer at full performance.  
+
+The code for the steering system worked as expected with the lines given online. Integration was easy, as the controller was already connected via Bluetooth to send input to the servo. Another easy fix came through the implementation of cotter pins for the linkage connections; the pins are small enough and allow for rotation during turning. The last step was to add clearance for the lug nuts, which was done through a second iteration of 3D printed steering knuckles. This allowed for tightening of the entire steering system, and brought the car closer to having true Ackermann steering geometry.
