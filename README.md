@@ -2,13 +2,31 @@
 This repository contains all of the files associated with the BAE 305 final project.
 ## Project Summary
 
+This report outlines the design, creation, and testing of a remote-control (RC) car intended for both the use of children and RC enthusiasts. In the original design concept, the user was intended to use radio connections to wirelessly control a four-wheel-drive, four-wheel-steer RC car programmed and powered by an Arduino Uno microcontroller. Additional features originally included a speedometer, a visual display, and car noises corresponding with the acceleration of the car. In the final product, the car was two-wheel-drive and two-wheel-steer and included features such as a handheld Bluetooth controller (as opposed to radio), an ultrasonic sensor serving as a safety feature, and a horn that plays the UK fight song. Through various testing phases, such as testing motor control via Bluetooth and iterating steering control to improve alignment, the RC car was completed and fully functional. 
+
 ## Design Description
 
 ### Bluetooth Wireless Connection
 
 #### Materials
 
+
+- HC-05 Bluetooth Module  
+- Breadboard  
+- Jumper wires  
+- Raspberry Pi 3  
+- Arduino Uno  
+- 8BitDo Zero 2 Controller  
+
 #### Assembly Procedures
+
+First, the communication between the Raspberry Pi 3 and Arduino Uno was created. Once the HC-05 Bluetooth module was acquired, it was plugged into a breadboard and wired to the Arduino via jumper wires. It was connected to the 5V power rail and ground, the RX pin was connected to the software TX port, and the TX pin was connected to the software RX port. On the Raspberry Pi, no additional hardware was needed, as it has native Bluetooth capabilities. Serial communication and Bluetooth pairing were enabled by modifying the /boot/config.txt and disabling the serial console via raspi-config and using the bluetoothctl menu. The HC-05 was put in pairing mode by pressing and holding its button while powering it, which caused the onboard LED to blink rapidly. The Raspberry Pi then scanned for devices, paired with the HC-05, and trusted the connection. Once paired, the HC-05 was assigned a virtual serial port (e.g., /dev/rfcomm0), which is called in the main Python script. 
+
+Once this connection was made, the 8BitDo Zero 2 gamepad was integrated via a wired USB connection to the Raspberry Pi. The controller was initialized in D-Input mode by holding the Start + Y buttons before connection, allowing it to register as a standard USB gamepad. Once connected, the Raspberry Pi automatically recognized the controller as /dev/input/js0. Functionality was verified using the jstest utility. Python was used to display button inputs to map button and directional inputs to specific vehicle actions, such as motor direction and auxiliary functions (playing the UK fight song).  
+
+<img width="479" alt="Screenshot 2025-04-30 at 2 15 17 PM" src="https://github.com/user-attachments/assets/ef632437-6112-4380-be69-5a888d180a2a" />
+
+Figure 1: HC-05 Wiring Diagram
 
 ### Ultrasonic Sensor 
 
@@ -117,6 +135,10 @@ Figure X: Circuit Diagram for the LED circuit. This is repeated for the second L
 
 ### Bluetooth
 
+Bluetooth was chosen as the means for communication rather than traditional radio. While traditional radio does not require pairing or draw the amount of power that Bluetooth does, Bluetooth was chosen for its ease of integration with both of the microcontrollers being used in the project. The Pi is natively compatible with Bluetooth devices, and the Arduino merely needed an inexpensive Bluetooth module (HC-05). Apart from the occasional disconnection due to the power demands of the module, this made connection seamless after the initial connection to the Pi was made.  
+
+Future designs may employ Bluetooth for additional features to the car. Supplemental power sources may be needed to prevent the disconnection of the module from the Pi. 
+
 ### Distance Sensing
 
 ### Steering
@@ -141,9 +163,21 @@ Lights were an added design feature of the car. These lights were to signal as t
 
 ## Testing Procedures
 
+The testing of the car took place in several phases as each feature was completed, as well as a final “sprint” to integrate all features.  
+
+
+The first feature to be completed was the establishment of the wireless connection. A series of tests were completed for each leg of communication previously mentioned. First, the communication between the Raspberry Pi 3 and Arduino Uno was tested. Once the HC-05 Bluetooth module was running on the Arduino, serial communications were opened on both the Arduino and Pi. The HC-05, acting as the slave, was sent serial messages via the assigned serial port from the Pi to confirm its connection. Once the connection between the Pi and Arduino was secured, attention was turned to connecting the 8BitDo controller to the Pi. The controller was wired to the Pi via USB—similar to how a keyboard would work with the Pi. To determine what messages each button of the controller was sending upon being pressed, a short python script was created and used to read the button press events. These outputs were recorded and used in the development of the primary code. 
+
+Another feature that needed to be completed and tested was sound. Initially, based on the DFPlayer specifications a 3W speaker was chosen. This speaker was the top of the power output range for the player. When in a system that ran solely the DFPlayer and the speaker, the sound worked without issues. When integrating with the system however, the speaker size proved to be an issue. Given the power demand of the 3W speaker, the addition of the sound system was creating a power need that exceeded the output capabilities of the Arduino. Consequently, the sound quality decreased, and other components of the car would not run when the speaker was playing. The necessary solution was switching to a different speaker that could use a smaller amount of power. Therefore, a 1W speaker was selected to replace the 3W speaker. This speaker was wired in the same way as the original speaker. This set up worked the first day it was implemented, however the following day had additional issues: giving loud low pitch feedback and not playing the desired mp3 files. A 9V battery was added to be the power source for the player and speaker. Wired through the Arduino however, this did not fix the issue as the Arduino limited the current flow of the circuit. To resolve this issue, a voltage regulator was incorporated. The voltage regulator connected to the 9V rather than the Arduino, supplying a 5V and 1.5 A to the DFPlayer and speaker. This resolved the sound issues. 
+
+Lights were another feature that needed to be tested and integrated. Initially, it was planned to use an LED strip to maximize the appeal of the LED. In the inital testing of the LEDs it was determined that 5V from the Arduino was not sufficient to run the strip. This LED strip would require an additional power source to supply enough current to maintain light for many LEDs. Once additional power sources were acquired for the motors, the LEDs were revisited to see if they could be powered. During this testing, a 9V battery was wired through the 5V pin of the Arduino rather than the necessary Vin pin. This issue caused the computer connected to the Arduino to receive 9V of back voltage and stop working. Individual LEDs were chosen to be used over the strip due to the lack of need for additional power. These LEDs wired directly to the Arduino and were controlled from HIGH and LOW commands through a digital pin. 
 
 The steering system also proposed a few challenges. The code was simple, just a few lines taken from online sources and tailored to the needs of this project. The CAD modeling resulted in relatively smooth implementation of the moving parts. However, the first iteration of the steering knuckles did not have clearance for the “lug nuts” and required more drop to allow for them. Connection methods for the drag links were also a point of testing. The holes were too small to reasonably use bolts and screws would’ve inhibited the rotation during turning. 
+
 ## Results
+
+![IMG_6337](https://github.com/user-attachments/assets/fdd1002d-88ab-4f99-a785-212e5844289f)
+Figure X: Complete car assembly
 
 ## Discussion
 
