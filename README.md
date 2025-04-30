@@ -31,8 +31,12 @@ Figure 1: HC-05 Wiring Diagram
 ### Ultrasonic Sensor 
 
 #### Materials
+•	HC-sr04 ultrasonic distance sensor
+•	4 male-female jumper cables
 
 #### Assembly Procedures
+Connect all four jumper cables to the HC-sr04, ensuring to note which wires connect to certain pins (Ideally using color coding to distinguish functions, such as red for power and black for ground). Connect the VCC pin of the Ultrasonic distance sensor to the 5V source of the Arduino. Connect the GND pin of the Ultrasonic distance sensor to any of the ground pins on the Arduino. Connect the Trig pin on the ultrasonic distance sensor to pin 6 on the Arduino, and the Echo pin to pin 7 on the Arduino. Ensure that each of the pins are connected to the correct pin on the Arduino before powering on.
+![image](https://github.com/user-attachments/assets/ab00fed3-09b2-42f4-a935-6a70b7adbbbd)
 
 ### Steering
 
@@ -93,8 +97,14 @@ Figure X: Steering Servo Wiring Schematic
 ### Body
 
 #### Materials
-
+•	3d Printer
+•	3d printing filament
 #### Assembly Procedures
+Download the 3d files "TruckBed","Truck cover" and "CarFront". These files can be printed by slicing them in any 3D printing slicing program, and then printing them on an appropriately sized 3D printer. The files will result in 3 files that will appear as seen below:
+![image](https://github.com/user-attachments/assets/ebaafa90-f2fd-43e7-a646-50aba946723d)
+![image](https://github.com/user-attachments/assets/ccc51285-e8b9-4306-a54b-73516ae395e0)
+![image](https://github.com/user-attachments/assets/084f6ad2-f7d5-48e5-b837-543897263b38)
+These pieces are designed to slide onto a 1.5mm thick aluminium plate that is 30cm x 15.5cm. to assemble simply slide the truck bed and the truck front onto the aluminum platform. the truck cover is designed to sit flush with the top of the truck bed, and can either be temporarily placed to access the electronics for maintenance, or glued closed for more permanent stability
 
 ### Speakers
 
@@ -140,7 +150,7 @@ Bluetooth was chosen as the means for communication rather than traditional radi
 Future designs may employ Bluetooth for additional features to the car. Supplemental power sources may be needed to prevent the disconnection of the module from the Pi. 
 
 ### Distance Sensing
-
+Mounted on the front of the WildCar is an ultrasonic distance sensor. This sensor works by pulsing out an ultrasonic sound wave with known properties, and then waiting until the sound wave returns to the sensor, after being reflected off the immediate surroundings. By monitoring the duration that the wave takes to return, the distance from the sensor to an obstacle can be determined. We used this as a way to prevent the user from accidentally crashing into an obstacle, by defining a minimum distance that the car should be from something before it stops.
 ### Steering
 To create a more realistically functioning car, we decided to model the steering after a two-wheel bell crank. The bell crank method uses a two-link system connected to each wheel that allows both wheels to turn from a single servo, similar to actual automobiles. This is done through a series of steering components, which includes a pitman arm, steering knuckles, and drag links. The goal with this system was to create what is known as Ackermann geometry. A steering system is considered to be Ackermann steering if the inside wheel is at a sharper angle than the outside wheel while turning. This is the case with the bell crank system, as seen below.
 
