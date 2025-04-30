@@ -31,9 +31,10 @@ Figure 1: HC-05 Wiring Diagram
 ### Ultrasonic Sensor 
 
 #### Materials
-
+-	HC-sr04 ultrasonic distance sensor
+-	4 male-female jumper cables
 #### Assembly Procedures
-
+Connect all four jumper cables to the HC-sr04, ensuring to note which wires connect to certain pins (Ideally using color coding to distinguish functions, such as red for power and black for ground). Connect the VCC pin of the Ultrasonic distance sensor to the 5V source of the Arduino. Connect the GND pin of the Ultrasonic distance sensor to any of the ground pins on the Arduino. Connect the Trig pin on the ultrasonic distance sensor to pin 6 on the Arduino, and the Echo pin to pin 7 on the Arduino. Ensure that each of the pins are connected to the correct pin on the Arduino before powering on.
 ### Steering
 
 #### Materials
@@ -52,37 +53,37 @@ Step 1: Bolt the front carriage under the base of the car using three ¼” bolt
 
 ![image](https://github.com/user-attachments/assets/08a6f2a9-ff0a-4d6a-b5ac-0010a96d6840)
 
-Figure X: Steering System Assembly Step 1
+Figure 2: Steering System Assembly Step 1
 
 Step 2: Install steering knuckle on each side of the front carriage using two ¼” bolts
 
 ![image](https://github.com/user-attachments/assets/339a3a2a-9231-463b-99c6-5513c82f32aa)
 
-Figure X: Steering System Assembly Step 2
+Figure 3: Steering System Assembly Step 2
 
 Step 3: Bolt Servo mount to base of car using two ¼” bolts and install the servo
 
 ![image](https://github.com/user-attachments/assets/3eb1e185-1fda-4cd7-b99e-526b81092372)
 
-Figure X: Steering System Assembly Step 3
+Figure 4: Steering System Assembly Step 3
 
 Step 4: Connect the servo to each steering knuckle with respected drag links, cotter pin each connection
 
 ![image](https://github.com/user-attachments/assets/58e12c10-ae57-48ac-aff8-da3e45756ed1)
 
-Figure X: Steering System Assembly Step 4
+Figure 5: Steering System Assembly Step 4
 
 Step 5: Bolt wheels to the outside face of each steering knuckle using a ¼” bolt
 
 ![image](https://github.com/user-attachments/assets/a2e4a77f-6bc3-4ebd-810c-9c81bceaf158)
 
-Figure X: Steering System Assembly Step 5
+Figure 6: Steering System Assembly Step 5
 
 Step 6: The servo is then wired using 5V for power, one power signal from a PWM pin, and a ground. The Arduino is coded to send an output for left and right turns at 45° based on the input from the controller. 
 
 ![image](https://github.com/user-attachments/assets/9d0cadc0-ba3e-405b-9068-16020f9461e4)
 
-Figure X: Steering Servo Wiring Schematic
+Figure 7: Steering Servo Wiring Schematic
 
 ### Body
 
@@ -102,7 +103,7 @@ The body was designed to be easily assembled and removed. There is a ridge forme
 
 ![image](https://github.com/user-attachments/assets/f5876d08-7cf8-4833-9979-6462e36b89cb)
 
-Figure X: Wiring for Motors and Motor Driver
+Figure 8: Wiring for Motors and Motor Driver
 
 ### Speakers
 
@@ -118,27 +119,28 @@ Figure X: Wiring for Motors and Motor Driver
 
 #### Assembly Procedures
 
-The Speaker assembly consisted of multiple interconnected pieces. The wiring can be found in Figure X. First, the Arduino was connected to the RX and TX pins of the DFPlayer mini. The RX of the player was connected through a parallel circuit that had two paths starting from the Arduino digital pin. The first path ran through a 680 resistor then split to the player. The second path after running through the 680 resistor, ran through a 1K resistor and to ground. This allowed the Arduino to control when the player functioned. The player controlled the sound, sourcing it to a 1W speaker to amplify the sound. The speaker connected to the SPK1 and SPK2 pins in the player. To power the speaker, a 9V battery was wired as the power source. The battery ran through a voltage regulator to set 5V and 1.5A to the DFPlayer. The voltage regulator output pin connected to the Vin of the player, supplying the necessary power to run the speaker. 
+The Speaker assembly consisted of multiple interconnected pieces. The wiring can be found in Figure 9. First, the Arduino was connected to the RX and TX pins of the DFPlayer mini. The RX of the player was connected through a parallel circuit that had two paths starting from the Arduino digital pin. The first path ran through a 680 resistor then split to the player. The second path after running through the 680 resistor, ran through a 1K resistor and to ground. This allowed the Arduino to control when the player functioned. The player controlled the sound, sourcing it to a 1W speaker to amplify the sound. The speaker connected to the SPK1 and SPK2 pins in the player. To power the speaker, a 9V battery was wired as the power source. The battery ran through a voltage regulator to set 5V and 1.5A to the DFPlayer. The voltage regulator output pin connected to the Vin of the player, supplying the necessary power to run the speaker. 
 
 The Arduino IDE code used a downloadable DFPlayer library. After a few set up functions, the DFPlayer Mini could play a specific file from the command “MP3player.play(#)” where # corresponds to the desired sound file number. Sound functions within the system at three separate points. The player functions from the second Arduino. First, an engine sound plays resulting from changes in acceleration. The DFPlayer command was integrated into an if statement for when the accelerometer reads a value above a threshold. The other two sounds, the UK fight song and the reverse sound, function in the same way—however the logic set to run them are found on the first Arduino. The Arduino 1 code sends a signal to Arduino 2 when a specific button is pressed for the fight song and the car is reversing for the reversing sound. Each sound plays through the audio file. The full code can be found in Results. 
 
 ![ChatGPT Image Apr 24, 2025, 07_51_10 PM](https://github.com/user-attachments/assets/49e78c2a-422a-499e-becc-d9fc334d4564)
-Figure X: Circuit Diagram for the sound components of the RC car. This wiring diagram was generated by ChatGPT 4o Ai
+
+Figure 9: Circuit Diagram for the sound components of the RC car. This wiring diagram was generated by ChatGPT 4o Ai
 
 ### Lights
 
 #### Materials
 
-LED x2 
-1K Ohm resistor x2 
+- LED x2 
+- 1K Ohm resistor x2 
 
 #### Assembly Procedures
 
-Two LEDs were added to the car in the same way. The circuit for these LED’s are simple and direct, with few components. Fed power from the Arduino, the circuit path flows from a digital pin to the 1K resistor in the breadboard, to the LED, to ground. The LED’s did not share a digital pin, as to allow them to be controlled separately. For the circuit diagram, see Figure X.
+Two LEDs were added to the car in the same way. The circuit for these LED’s are simple and direct, with few components. Fed power from the Arduino, the circuit path flows from a digital pin to the 1K resistor in the breadboard, to the LED, to ground. The LED’s did not share a digital pin, as to allow them to be controlled separately. For the circuit diagram, see Figure 10.
 
 ![LED circuit diagram image](https://github.com/user-attachments/assets/1fa10b14-06f0-4c6f-aa4c-e830933da2d8)
 
-Figure X: Circuit Diagram for the LED circuit. This is repeated for the second LED circuit
+Figure 10: Circuit Diagram for the LED circuit. This is repeated for the second LED circuit
 
 ## Design Discussion
 
@@ -155,13 +157,13 @@ To create a more realistically functioning car, we decided to model the steering
 
 ![image](https://github.com/user-attachments/assets/ec759c19-a169-40f3-bb2a-fdf99235ec02)
 
-Figure X: Ackermann Steering Angle Phenomenon
+Figure 11: Ackermann Steering Angle Phenomenon
 
 With the pitman arm at a center-point, equal length drag links, and mirrored geometry for the steering knuckles, this creates a sharper angle for the side that the servo is turning away from. If not for this phenomenon, the inside wheel would be fighting the ground during turns due to travelling on a smaller turning radii than the outside wheel, as shown below. Ackermann steering allows for less wear on tires, steering components, and axle gearing if applicable. 
 
 ![image](https://github.com/user-attachments/assets/5186bd61-a32d-4c9a-b299-12ec5034290e)
 
-Figure X: Inside wheel vs. Outside wheel Turning Radius 
+Figure 12: Inside wheel vs. Outside wheel Turning Radius 
 ### Sound
 
 The car contains a sound component that functions as a final output for multiple logic systems. The sound for the car functions through a DFPlayer Mini. The DFPlayer is an MP3 module for the Arduino. The DFPlayer Mini was chosen as the sound playing device because of its easy integration with the Arduino system. Arduino IDE has a downloadable library for the DFplayer that allows audio to be integrated into the code with a few simple commands. For this application, the DFPlayer Mini connects to a 1W speaker that projects the sound. Housing a micro-SD card, the player runs MP3 audio files when directed by the Arduino microcontroller.  A voltage regulator and 9V battery were used to ensure the system received adequate power. The 9V supplied the voltage, and the regulator ensured adequate current flowed through the DFPlayer and to the speaker.  
@@ -187,7 +189,7 @@ The steering system also proposed a few challenges. The code was simple, just a 
 
 ![IMG_6337](https://github.com/user-attachments/assets/fdd1002d-88ab-4f99-a785-212e5844289f)
 
-Figure X: Complete car assembly
+Figure 13: Complete car assembly
 
 ## Discussion
 
