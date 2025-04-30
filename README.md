@@ -37,19 +37,13 @@ Figure 1: HC-05 Wiring Diagram
 ### Steering
 
 #### Materials
-  •	¼” – 20 tpi Hardware
-
-  •	3D printed Steering Components
-
+  -	¼” – 20 tpi Hardware
+  -	3D printed Steering Components
     -	Steering Knuckles
-    
     -	Drag Links
-    
     -	Front Carriage
-    
-  •	SG90 Servo and Included Lever (Pitman arm)
-
-  •	1/8” Cotter Pins
+  -	SG90 Servo and Included Lever (Pitman arm)
+  -	1/8” Cotter Pins
 
 #### Assembly Procedures
 The steering system is simple to assemble, creating an intuitive assembly and maintenance process. 
@@ -93,20 +87,34 @@ Figure X: Steering Servo Wiring Schematic
 ### Body
 
 #### Materials
+-	3D printed components
+    -	Cab 
+    -	Front Clip
+    -	Bed 
+    -	Bed Cover
+-	SparkFun inventor’s kit
+    -	Motor driver
+    -	Motor x2
+-	9V battery
 
 #### Assembly Procedures
+The body was designed to be easily assembled and removed. There is a ridge formed along the bottom of each body panel which simply slides over the aluminum base plate. When each body panel has been attached to the base, route the wires between the bottom of the bed and the base plate and connect them according to the schematic below. Finally, turn the battery packs on and place the bed cover in position to shield the electrical components.
+
+![image](https://github.com/user-attachments/assets/f5876d08-7cf8-4833-9979-6462e36b89cb)
+
+Figure X: Wiring for Motors and Motor Driver
 
 ### Speakers
 
 #### Materials
 
-Arduino 
-DFPlayer Mini 
-1W 8 Ohm speaker 
-680 Ohm resistor 
-1K Ohm resistor 
-9V battery 
-8705 Voltage Regulator 
+- Arduino 
+- DFPlayer Mini 
+- 1W 8 Ohm speaker 
+- 680 Ohm resistor 
+- 1K Ohm resistor 
+- 9V battery 
+- 8705 Voltage Regulator 
 
 #### Assembly Procedures
 
@@ -129,6 +137,7 @@ LED x2
 Two LEDs were added to the car in the same way. The circuit for these LED’s are simple and direct, with few components. Fed power from the Arduino, the circuit path flows from a digital pin to the 1K resistor in the breadboard, to the LED, to ground. The LED’s did not share a digital pin, as to allow them to be controlled separately. For the circuit diagram, see Figure X.
 
 ![LED circuit diagram image](https://github.com/user-attachments/assets/1fa10b14-06f0-4c6f-aa4c-e830933da2d8)
+
 Figure X: Circuit Diagram for the LED circuit. This is repeated for the second LED circuit
 
 ## Design Discussion
@@ -177,6 +186,7 @@ The steering system also proposed a few challenges. The code was simple, just a 
 ## Results
 
 ![IMG_6337](https://github.com/user-attachments/assets/fdd1002d-88ab-4f99-a785-212e5844289f)
+
 Figure X: Complete car assembly
 
 ## Discussion
