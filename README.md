@@ -31,9 +31,11 @@ Figure 1: HC-05 Wiring Diagram
 ### Ultrasonic Sensor 
 
 #### Materials
+•	HC-sr04 ultrasonic distance sensor
+•	4 male-female jumper cables
 
 #### Assembly Procedures
-
+Connect all four jumper cables to the HC-sr04, ensuring to note which wires connect to certain pins (Ideally using color coding to distinguish functions, such as red for power and black for ground). Connect the VCC pin of the Ultrasonic distance sensor to the 5V source of the Arduino. Connect the GND pin of the Ultrasonic distance sensor to any of the ground pins on the Arduino. Connect the Trig pin on the ultrasonic distance sensor to pin 6 on the Arduino, and the Echo pin to pin 7 on the Arduino. Ensure that each of the pins are connected to the correct pin on the Arduino before powering on.
 ### Steering
 
 #### Materials
